@@ -22,8 +22,9 @@
 enum t_type
 {
 	INVALID = 0;
-	NORMAL = 1;
-	SPECIAL = 2;
+	CHAR = 1;
+	NUMBER = 2;
+	SPECIAL = 3;
 }
 
 class ScalarConverter
@@ -33,7 +34,7 @@ class ScalarConverter
 			class WrongInputException : public std::exception
 			{
 				public:
-						virtual const char *what() const throw();
+					virtual const char *what() const throw();
 			}
 	private:
 			ScalarConverter();

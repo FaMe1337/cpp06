@@ -64,10 +64,10 @@ static t_type checkType(std::string str)
 	else if (str == "nan" || str == "nanf" || str == "+inf" || str == "+inff" || str == "-inf" || str == "-inff")
 		return (SPECIAL);
 	else if (str.size() == 1 && !std::isdigit(static_cast<unsigned char>str[0]))
-		return (NORMAL);	
+		return (CHAR);	
 	else if (parsing(str))
 		return (INVALID);
-	return (NORMAL);
+	return (NUMBER);
 }
 
 static void convertSpecial(std::string str)
@@ -112,13 +112,59 @@ void ScalarConverter::convert(std::string str)
 	{
 		case 0:
 			throw ScalarConvertion::what();
-			break;
 		case 1:
-			printConversion(str);
-			break;
+			char c = str[0];
+			double value = (static_cast<double>)c;
+			printChar(value); //continue from ehre
+			return;
 		case 2:
-			convertSpecial(str);
-			break;
+			printDouble(value);
+			return;
+		case 3:
+			printSpecial(str);
+			return;
 	}
 
+}
+
+void ScalarConverter::convert(const std::string &str)
+{
+	LiteralType type = checkType(literal);
+
+if (type == INVALID)
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
+		return;
+}
+if (type == SPECIAL)
+{
+	printSpecial(literal);
+	return;
+}
+// NORMAL case: either char literal or numeric
+if (isCharLiteral(literal))
+{
+	char c = literal[0];
+	double value = static_cast<double>(c);
+	printFromDouble(value);
+	return;
+}
+// numeric case: int / float / double
+std::string toParse = literal;
+// strip trailing 'f' for float literals
+if (toParse[toParse.size() - 1] == 'f')
+	toParse = toParse.substr(0, toParse.size() - 1);
+double value = std::strtod(toParse.c_str(), NULL);
+if (end == toParse.c_str() || *end != '\0')
+{
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	std::cout << "float: impossible" << std::endl;
+	std::cout << "double: impossible" << std::endl;
+	return;
+}
+printFromDouble(value);
 }
