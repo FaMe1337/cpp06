@@ -14,6 +14,7 @@
 #define SCALARCONVERTER_HPP
 
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 #include <climits>
 #include <cstdlib>
@@ -21,26 +22,26 @@
 
 enum t_type
 {
-	INVALID = 0;
-	CHAR = 1;
-	NUMBER = 2;
-	SPECIAL = 3;
-}
+	INVALID = 0,
+	CHAR = 1,
+	NUMBER = 2,
+	SPECIAL = 3,
+};
 
 class ScalarConverter
 {
 	public:
-			void convert(std::string str);
+			static void convert(const std::string &str);
 			class WrongInputException : public std::exception
 			{
 				public:
 					virtual const char *what() const throw();
-			}
+			};
 	private:
 			ScalarConverter();
 			~ScalarConverter();
 			ScalarConverter(const ScalarConverter &copy);
 			ScalarConverter& operator=(const ScalarConverter &other);
-}
+};
 
 #endif
