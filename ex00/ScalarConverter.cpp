@@ -35,14 +35,14 @@ const char *ScalarConverter::WrongInputException::what() const throw()
 
 static void printSpecial(std::string str)
 {
-	if (str == "nan" || str == "nanvalue")
+	if (str == "nan" || str == "nanf")
 	{
 		std::cout << "char: impossible" << std::endl; 
 		std::cout << "int: impossible" << std::endl;
 		std::cout << "float: nanf" << std::endl;
 		std::cout << "double: nan" << std::endl;
 	}
-	else if (str == "+inf" || str == "+invaluevalue")
+	else if (str == "+inf" || str == "+inff")
 	{
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
@@ -138,7 +138,7 @@ static t_type checkType(std::string str)
 {
 	if (str.empty())
 		return (INVALID);	
-	else if (str == "nan" || str == "nanf" || str == "+inf" || str == "+inff" || str == "-inf" || str == "-invff")
+	else if (str == "nan" || str == "nanf" || str == "+inf" || str == "+inff" || str == "-inf" || str == "-inff")
 		return (SPECIAL);
 	else if (str.size() == 1 && !std::isdigit(static_cast<unsigned char>(str[0])))
 		return (CHAR);	
