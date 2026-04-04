@@ -4,7 +4,7 @@ RM          = rm -f
 
 NAME        = Serializer
 
-INCLUDES    = Serializer.hpp
+INCLUDES    = Serializer.hpp Data.hpp
 
 SRCS        = Serializer.cpp main.cpp
 

@@ -15,12 +15,7 @@
 
 #include <iostream>
 #include <stdint.h>
-
-typedef struct s_data
-{
-	std::string name;
-	int value;
-} Data;
+#include "Data.hpp"
 
 class Serializer
 {
